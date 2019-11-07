@@ -1,4 +1,4 @@
-#World most advanced PID control algotithm
+# World most advanced PID control algotithm
 
 src/pid.h define pid constracture  
 src/pid.c define pid algorithm  
