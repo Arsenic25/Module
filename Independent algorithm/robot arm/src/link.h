@@ -33,7 +33,6 @@ typedef struct {
     float m;                //[kg] mass of entire link
     float c[3];             //[m] position vector of contor of mass from self coordinate system
     float I[3];             //[??] matrix of inertia moment 
-
     /***parameter***/
 
 } link_t;
