@@ -22,6 +22,8 @@ float* vcrosso(float* a, float* b);
 void mprint(float* a);
 float mget(float* a, int n, int m);
 float* mset(float* a, int n, int m, float v);
+float* mT(float* a, float* ans);
+float* mTo(float* a);
 float* madd(float* a, float* b, float* ans);
 float* maddo(float* a, float* b);
 float* msub(float* a, float* b, float* ans);

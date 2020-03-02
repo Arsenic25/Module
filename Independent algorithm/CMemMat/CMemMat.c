@@ -80,11 +80,26 @@ float* mset(float* a, int n, int m, float v) {
     return &a[3*n + m];
 }
 
-float* madd(float* a, float* b, float* ans) {
+float* mT(float* a, float* ans) {
     for (int n = 0; n < 3; n++) {
-        for (int m = 0; m < 3; m++) {
-            ans[3*n + m] = a[3*n + m] + b[3*n + m];
+        for(int m = 0; m < 3; m++) {
+            ans[3*n + m] = a[3*m + n];
         }
+    }
+    return ans;
+}
+
+float* mTo(float* a) {
+    float ans[3][3];
+    float* p = mT(a, ans);
+    for (int n = 0; n < 9; n++) {
+        a[n] = p[n];
+    }   
+}
+
+float* madd(float* a, float* b, float* ans) {
+    for (int n = 0; n < 9; n++) {
+        ans[n] = a[n] + b[n];
     }
     return ans;
 }
@@ -92,18 +107,14 @@ float* madd(float* a, float* b, float* ans) {
 float* maddo(float* a, float* b) {
     float ans[3][3];
     float* p = madd(a, b, ans);
-    for (int n = 0; n < 3; n++) {
-        for (int m = 0; m < 3; m++) {
-            b[3*n + m] = p[3*n + m];
-        }
+    for (int n = 0; n < 9; n++) {
+        b[n] = p[n];
     }
 }
 
 float* msub(float* a, float* b, float* ans) {
-    for (int n = 0; n < 3; n++) {
-        for (int m = 0; m < 3; m++) {
-            ans[3*n + m] = a[3*n + m] - b[3*n + m];
-        }
+    for (int n = 0; n < 9; n++) {
+        ans[n] = a[n] - b[n];
     }
     return ans;
 }
@@ -111,10 +122,8 @@ float* msub(float* a, float* b, float* ans) {
 float* msubo(float* a, float* b) {
     float ans[3][3];
     float* p = msub(a, b, ans);
-    for (int n = 0; n < 3; n++) {
-        for (int m = 0; m < 3; m++) {
-            b[3*n + m] = p[3*n + m];
-        }
+    for (int n = 0; n < 9; n++) {
+        b[n] = p[n];
     }
 }
 
@@ -128,5 +137,9 @@ float* mmult(float* a, float* b, float* ans) {
 }
 
 float* mmulto(float* a, float* b) {
-
+    float ans[3][3];
+    float* p = mmult(a, b, ans);
+    for (int n = 0; n < 9; n++) {
+        b[n] = p[n];
+    }
 }
