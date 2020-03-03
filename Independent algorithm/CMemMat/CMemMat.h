@@ -17,6 +17,7 @@ float* vsubo(float* a, float* b);
 float vdot(float* a, float* b);
 float* vcross(float* a, float* b, float* ans);
 float* vcrosso(float* a, float* b);
+float* vA(float* v, float* R);
 
 /***matrix***/
 void mprint(float* a);
@@ -30,5 +31,7 @@ float* msub(float* a, float* b, float* ans);
 float* msubo(float* a, float* b);
 float* mmult(float* a, float* b, float* ans);
 float* mmulto(float* a, float* b);
+float* mV(float* R, float* v);
+
 
 #endif /* CMEMMAT_H_ */

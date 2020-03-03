@@ -61,6 +61,22 @@ float* vcrosso(float* a, float* b) {
     return b;
 }
 
+float* vA(float* v, float* R) {
+    R[0] = 0.0f;
+    R[1] = -v[2];
+    R[2] = v[1];
+
+    R[3] = v[2];
+    R[4] = 0.0f;
+    R[5] = -v[0];
+    
+    R[6] = -v[1];
+    R[7] = v[0];
+    R[8] = 0.0f;
+
+    return R;
+}
+
 /***matrix***/
 void mprint(float* a) {
     for (int n = 0; n < 3; n++) {
@@ -142,4 +158,11 @@ float* mmulto(float* a, float* b) {
     for (int n = 0; n < 9; n++) {
         b[n] = p[n];
     }
+}
+
+float* mV(float* R, float* v) {
+    v[0] = R[7];
+    v[1] = R[2];
+    v[2] = R[3];
+    return v;
 }
