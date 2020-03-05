@@ -166,3 +166,29 @@ float* mV(float* R, float* v) {
     v[2] = R[3];
     return v;
 }
+
+float* mrod(float* a, float q, float* ans) {
+    float s = sin(q);
+    float c = cos(q);
+    float inc = 1 - c;
+    float xyc = a[0]*a[1]*inc;
+    float yzc = a[1]*a[2]*inc;
+    float zxc = a[2]*a[0]*inc;
+    float xs = a[0]*s;
+    float ys = a[1]*s;
+    float zs = a[2]*s;
+
+    ans[0] = c + a[0]*a[0]*inc;
+    ans[1] = xyc - zs;
+    ans[2] = zxc + ys;
+
+    ans[3] = xyc + zs;
+    ans[4] = c + a[1]*a[1]*inc;
+    ans[5] = yzc - xs;
+    
+    ans[6] = zxc - ys;
+    ans[7] = yzc + xs;
+    ans[8] = c + a[2]*a[2]*inc;
+    
+    return ans;
+}

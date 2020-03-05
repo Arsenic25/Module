@@ -8,6 +8,8 @@
 #ifndef LINK_H_
 #define LINK_H_
 
+#include "CMemMat.h"
+
 typedef struct {
     /***parameter***/
     //link ID
@@ -36,6 +38,7 @@ typedef struct {
     /***parameter***/
 
 } link_t;
+
 
 
 #endif /* LINK_H_ */
