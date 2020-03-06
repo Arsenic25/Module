@@ -5,6 +5,8 @@
  *      Author: Arsenic
  */
 
+#include"CMemMat.h"
+
 /***vector***/
 void vprint(float* a) {
 
@@ -191,4 +193,14 @@ float* mrod(float* a, float q, float* ans) {
     ans[8] = c + a[2]*a[2]*inc;
     
     return ans;
+}
+
+float* rotv(float* R, float* v, float* ans) {
+    ans[0] = R[0]*v[0] + R[1]*v[1] + R[2]*v[2];
+    ans[1] = R[3]*v[0] + R[4]*v[1] + R[5]*v[2];
+    ans[1] = R[6]*v[0] + R[7]*v[1] + R[8]*v[2];
+}
+
+float* rotvo(float* R, float* v) {
+
 }

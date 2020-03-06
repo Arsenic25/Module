@@ -36,5 +36,8 @@ float* mmulto(float* a, float* b);                  //b = ab
 float* mV(float* R, float* v);                      //produce vector from Skew symmetric matrix
 float* mrod(float* a, float q, float* ans);         //produce rotation matrix from unit rotation vector and rotation position q[rad]
 
+float* rotv(float* R, float* v, float* ans);
+float* rotvo(float* R, float* v);
+
 
 #endif /* CMEMMAT_H_ */
