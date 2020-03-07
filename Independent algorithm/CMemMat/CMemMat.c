@@ -112,7 +112,9 @@ float* mTo(float* a) {
     float* p = mT(a, ans);
     for (int n = 0; n < 9; n++) {
         a[n] = p[n];
-    }   
+    }
+
+    return a;
 }
 
 float* madd(float* a, float* b, float* ans) {
@@ -128,6 +130,8 @@ float* maddo(float* a, float* b) {
     for (int n = 0; n < 9; n++) {
         b[n] = p[n];
     }
+
+    return b;
 }
 
 float* msub(float* a, float* b, float* ans) {
@@ -143,6 +147,8 @@ float* msubo(float* a, float* b) {
     for (int n = 0; n < 9; n++) {
         b[n] = p[n];
     }
+
+    return b;
 }
 
 float* mmult(float* a, float* b, float* ans) {
@@ -160,6 +166,8 @@ float* mmulto(float* a, float* b) {
     for (int n = 0; n < 9; n++) {
         b[n] = p[n];
     }
+
+    return b;
 }
 
 float* mV(float* R, float* v) {
@@ -199,8 +207,14 @@ float* rotv(float* R, float* v, float* ans) {
     ans[0] = R[0]*v[0] + R[1]*v[1] + R[2]*v[2];
     ans[1] = R[3]*v[0] + R[4]*v[1] + R[5]*v[2];
     ans[1] = R[6]*v[0] + R[7]*v[1] + R[8]*v[2];
+
+    return ans;
 }
 
 float* rotvo(float* R, float* v) {
-
+    float ans[3];
+    float* p = rotv(R, v, ans);
+    for (int n = 0; n < 3; n++) {
+        v[n] = p[n];
+    }  
 }
