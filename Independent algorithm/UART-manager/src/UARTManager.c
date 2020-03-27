@@ -6,6 +6,10 @@
  */
 #include "UARTManager.h"
 
+uint8_t HEADER_PACKET[4] = {'s', 0xFF, 0x00, 0xAA};
+uint8_t STOP_PACKET = 'e';
+
+
 void initUARTManager(UARTManager_t *manager) {
     manager->onCapture = 0;
     manager->dataPointer = 0;
@@ -63,11 +67,11 @@ void makeTxData(UARTManager_t *manager) {
         manager->serializedTxData[i] = HEADER_PACKET[i];
     }
 
-    for (int i; i < TX_DATA_LENGTH; i++) {      //make data packet
-        manager->serializedTxData[4 + (4*i) + 0] = (uint8_t)((manager->txData[i] & 0xFF000000) >> 24);
-        manager->serializedTxData[4 + (4*i) + 1] = (uint8_t)((manager->txData[i] & 0x00FF0000) >> 16);
-        manager->serializedTxData[4 + (4*i) + 2] = (uint8_t)((manager->txData[i] & 0x0000FF00) >> 8);
-        manager->serializedTxData[4 + (4*i) + 3] = (uint8_t)((manager->txData[i] & 0x000000FF) >> 0);
+    for (int i = 0; i < TX_DATA_LENGTH; i++) {      //make data packet
+        manager->serializedTxData[4 + (4*i) + 0] = (uint8_t)((manager->txData[i].i & 0xFF000000) >> 24);
+        manager->serializedTxData[4 + (4*i) + 1] = (uint8_t)((manager->txData[i].i & 0x00FF0000) >> 16);
+        manager->serializedTxData[4 + (4*i) + 2] = (uint8_t)((manager->txData[i].i & 0x0000FF00) >> 8);
+        manager->serializedTxData[4 + (4*i) + 3] = (uint8_t)((manager->txData[i].i & 0x000000FF) >> 0);
     }
 
     //make stop packet
