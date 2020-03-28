@@ -25,7 +25,7 @@ void rxUpdate(UARTManager_t *manager, uint8_t d) {
             (manager->headerDetector[((manager->headerPointer) + 2)%4] == HEADER_PACKET[1]) &&
             (manager->headerDetector[((manager->headerPointer) + 3)%4] == HEADER_PACKET[2]) &&
             (manager->headerDetector[((manager->headerPointer) + 0)%4] == HEADER_PACKET[3])
-        ) {     //start capture
+        ) {     //right then start capture
             manager->onCapture = 1;
             manager->dataPointer = 0;
         }
@@ -38,7 +38,7 @@ void rxUpdate(UARTManager_t *manager, uint8_t d) {
             manager->onCapture = 0;
             manager->dataPointer = 0;
 
-            if (d == STOP_PACKET) {     //save available rx data
+            if (d == STOP_PACKET) {     //save available rx data for float format
                 for (int i = 0; i < RX_DATA_LENGTH; i++) {
                 	union { float f; uint8_t byte[4]; } t;
                 	t.byte[0] = manager->serializedRxData[4*i + 0];
@@ -69,7 +69,7 @@ void makeTxData(UARTManager_t *manager) {
         manager->serializedTxData[i] = HEADER_PACKET[i];
     }
 
-    for (int i = 0; i < TX_DATA_LENGTH; i++) {      //make data packet
+    for (int i = 0; i < TX_DATA_LENGTH; i++) {      //make data packet for 8bit x 4 format
     	t.f = manager->txData[i];
     	manager->serializedTxData[4 + (4*i) + 0] = t.byte[0];
     	manager->serializedTxData[4 + (4*i) + 1] = t.byte[1];
