@@ -9,7 +9,6 @@
 uint8_t HEADER_PACKET[4] = {'s', 0xFF, 0x00, 0xAA};
 uint8_t STOP_PACKET = 'e';
 
-
 void initUARTManager(UARTManager_t *manager) {
     manager->onCapture = 0;
     manager->dataPointer = 0;
