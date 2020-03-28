@@ -40,12 +40,12 @@ void rxUpdate(UARTManager_t *manager, uint8_t d) {
 
             if (d == STOP_PACKET) {     //save available rx data
                 for (int i = 0; i < RX_DATA_LENGTH; i++) {
-                    manager->rxData[i] = (float)(
-                        (manager->serializedRxData[4*i + 0] << 24) |
-                        (manager->serializedRxData[4*i + 1] << 16) |
-                        (manager->serializedRxData[4*i + 2] << 8) |
-                         manager->serializedRxData[4*i + 3]
-                    );
+                	union { float f; uint8_t byte[4]; } t;
+                	t.byte[0] = manager->serializedRxData[4*i + 0];
+                	t.byte[1] = manager->serializedRxData[4*i + 1];
+                	t.byte[2] = manager->serializedRxData[4*i + 2];
+                	t.byte[3] = manager->serializedRxData[4*i + 3];
+                	manager->rxData[i] = t.f;
                 }
             }
 
@@ -63,15 +63,18 @@ void rxUpdateN(UARTManager_t *manager, uint8_t *d, int n) {
 }
 
 void makeTxData(UARTManager_t *manager) {
+	union { float f; uint8_t byte[4]; } t;
+
     for (int i = 0; i < 4; i++) {               //make header packet
         manager->serializedTxData[i] = HEADER_PACKET[i];
     }
 
     for (int i = 0; i < TX_DATA_LENGTH; i++) {      //make data packet
-        manager->serializedTxData[4 + (4*i) + 0] = (uint8_t)((manager->txData[i].i & 0xFF000000) >> 24);
-        manager->serializedTxData[4 + (4*i) + 1] = (uint8_t)((manager->txData[i].i & 0x00FF0000) >> 16);
-        manager->serializedTxData[4 + (4*i) + 2] = (uint8_t)((manager->txData[i].i & 0x0000FF00) >> 8);
-        manager->serializedTxData[4 + (4*i) + 3] = (uint8_t)((manager->txData[i].i & 0x000000FF) >> 0);
+    	t.f = manager->txData[i];
+    	manager->serializedTxData[4 + (4*i) + 0] = t.byte[0];
+    	manager->serializedTxData[4 + (4*i) + 1] = t.byte[1];
+    	manager->serializedTxData[4 + (4*i) + 2] = t.byte[2];
+    	manager->serializedTxData[4 + (4*i) + 3] = t.byte[3];
     }
 
     //make stop packet
