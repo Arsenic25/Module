@@ -30,9 +30,9 @@ typedef struct {
 	/***input***/
 	float error;	//[META]
 	/***input***/
-} _pid_t;
+} pid_t;
 
 //calculate output value from error
-float pidExecute(_pid_t *pid);
+float pidExecute(pid_t *pid);
 
 #endif /* PID_H_ */
