@@ -6,7 +6,7 @@
  */
 #include "pid.h"
 
-float pidExecute(_pid_t *pid) {
+float pidExecute(pid_t *pid) {
 	float u = 0;
 	pid->integralOut += pid->i * pid->error * (pid->t/1000.0f);
 	if (pid->integralOutLimit < pid->integralOut) pid->integralOut = pid->integralOutLimit;
