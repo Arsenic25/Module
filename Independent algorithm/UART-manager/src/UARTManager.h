@@ -12,6 +12,10 @@
 
 #define TX_DATA_LENGTH 5
 #define RX_DATA_LENGTH 5
+
+#define SERIALIZED_RX_DATA_SIZE (4*RX_DATA_LENGTH)
+#define SERIALIZED_TX_DATA_SIZE (4 + 4*TX_DATA_LENGTH + 1)
+
 extern uint8_t HEADER_PACKET[4];
 extern uint8_t STOP_PACKET;
 
@@ -23,8 +27,8 @@ typedef struct {
 
     uint8_t headerDetector[4];
 
-    uint8_t serializedRxData[4*RX_DATA_LENGTH];
-    uint8_t serializedTxData[4 + 4*TX_DATA_LENGTH + 1];
+    uint8_t serializedRxData[SERIALIZED_RX_DATA_SIZE];
+    uint8_t serializedTxData[SERIALIZED_TX_DATA_SIZE];
 
     float rxData[RX_DATA_LENGTH];
     float txData[TX_DATA_LENGTH];
