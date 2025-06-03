@@ -9,30 +9,40 @@
 #define PID_H_
 
 typedef struct {
-	/***parameter***/
-	float t;	//time cycle[ms]	pid calculate period
+    bool enable;
 
-	float p;	//gain p[META] proportional
-	float i;	//gain i[META] integral
-	float d;	//gain d[META] differential
+    /***parameter***/
+    float t;	//time cycle[ms]	pid calculate period
 
-	float outLimit;	//[META]	control output max value
-	float integralOutLimit;	//[META]	integral effect max output value
-	float differentialFilterRate;	//[%](0~1)	differemtial effect smoothing
-	/***parameter***/
+    float p;	//gain p[META] proportional
+    float i;	//gain i[META] integral
+    float d;	//gain d[META] differential
 
-	/***calculate***/
-	float integralOut;	//[META]
-	float lastError;	//[META]
-	float differentialFilter;	//[META]
-	/***calculate***/
+    float outLimit;	//[META]	control output max value
+    float integralOutLimit;	//[META]	integral effect max output value
+    float differentialFilterRate;	//[%](0~1)	differemtial effect smoothing
+    /***parameter***/
 
-	/***input***/
-	float error;	//[META]
-	/***input***/
-} pid_t;
+    /***calculate***/
+    float integralOut;	//[META]
+    float lastError;	//[META]
+    float differentialFilter;	//[META]
+    /***calculate***/
+
+    /***input***/
+    float error;	//[META]
+    /***input***/
+
+    float* target_p;
+    float* follow_p;
+
+    float out;
+
+} pid_control_t;
 
 //calculate output value from error
-float pidExecute(pid_t *pid);
+float pidExecute(pid_control_t* pid);
+
+void clearPid(pid_control_t* pid);
 
 #endif /* PID_H_ */
