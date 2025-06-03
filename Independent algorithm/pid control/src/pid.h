@@ -8,6 +8,8 @@
 #ifndef PID_H_
 #define PID_H_
 
+#include <stdbool.h>
+
 typedef struct {
     bool enable;
 
@@ -23,20 +25,22 @@ typedef struct {
     float differentialFilterRate;	//[%](0~1)	differemtial effect smoothing
     /***parameter***/
 
-    /***calculate***/
+    /***internal variables***/
     float integralOut;	//[META]
     float lastError;	//[META]
     float differentialFilter;	//[META]
-    /***calculate***/
 
-    /***input***/
     float error;	//[META]
-    /***input***/
+    /***internal variables***/
 
+    /***input***/
     float* target_p;
     float* follow_p;
+    /***input***/
 
+    /***output***/
     float out;
+    /***output***/
 
 } pid_control_t;
 
